@@ -1,6 +1,7 @@
 # fetchcode
 
-This application has screen which displays two section
+This application has screen which displays two sections
+
 1. Response code - response from api server
 2. fetch count - Number of times reponse code fetched throught app lifecycle
 
