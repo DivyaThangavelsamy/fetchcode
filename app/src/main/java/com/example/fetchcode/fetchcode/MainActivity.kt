@@ -2,8 +2,10 @@ package com.example.fetchcode.fetchcode
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.example.fetchcode.R
 import com.example.fetchcode.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,5 +20,10 @@ class MainActivity : AppCompatActivity() {
         dataBinding.lifecycleOwner = this
         dataBinding.viewModel = viewModel
         viewModel.initCounterValue()
+        viewModel.errorMsgLiveData.observe(this, Observer { status ->
+            status.let {
+                Toast.makeText(this,status,Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

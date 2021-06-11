@@ -1,6 +1,5 @@
 package com.example.fetchcode.fetchcode
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.fetchcode.data.api.FetchResponseCodeRepository
@@ -9,6 +8,7 @@ import com.example.fetchcode.utils.SharedPreferenceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import com.example.fetchcode.data.api.Constants
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +20,7 @@ open class MainActivityViewModel @Inject constructor(
 
     var responseCodeLiveData = MutableLiveData<String>()
     var counterLiveData = MutableLiveData(0)
+    var errorMsgLiveData = MutableLiveData<String>()
 
     fun fetchCode() {
         responseCodeRepository.fetchUUIDCode(this)
@@ -41,7 +42,11 @@ open class MainActivityViewModel @Inject constructor(
     }
 
     override fun onError(e: Throwable) {
-        //TODO Add toast for network error
+        errorMessage(e.toString())
+    }
+
+    fun errorMessage(message: String) {
+        errorMsgLiveData.postValue(Constants.NETWORK_ERR_MSG)
     }
 
     fun setResponseCode(responseCode: String) {
