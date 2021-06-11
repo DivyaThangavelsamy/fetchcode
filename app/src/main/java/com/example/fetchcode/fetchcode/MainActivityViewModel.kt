@@ -41,7 +41,7 @@ open class MainActivityViewModel @Inject constructor(
     }
 
     override fun onError(e: Throwable) {
-
+        //TODO Add toast for network error
     }
 
     fun setResponseCode(responseCode: String) {
